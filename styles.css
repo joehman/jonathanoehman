@@ -1,0 +1,20 @@
+
+
+
+
+.container {
+    margin: 0 auto; /* centers horizontally */
+    text-align: center;
+    width:fit-content;
+}
+
+.mainlink {
+    margin: 0;
+    text-align: left;
+    font-size: 50px;
+    text-decoration: none;
+}
+
+#title {
+    font-size: 80px;
+}
