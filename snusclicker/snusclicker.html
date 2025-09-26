@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,11 +8,30 @@
 </head>
 <body>
     
-    <div>
-        <h1> Snushemmet </h1>
+    <div id="clickbox" class="container">
+        <h1>Snushemmet</h1>
+        <h2 id="snuscount" >0</h2>
+
+        <button id="snusbutton" class="container">Snus</button>
     </div>
 
 
+    <div id="purchaseditemsbox" class="container wide">
+        <h2>Purchased Items</h2>
+        <div id="purchaseditems" class=" wide overflow">
+
+        </div>
+    </div>
+
+    <div id="shopbox" class="container right">
+        <h1>Shop</h1>
+
+        <div id="shopitems" class="shopitems overflow">
+
+        </div>
+    </div>
+
+    <script src="game.js"></script>
     <script src="snusclicker.js"></script>
 </body>
 </html>

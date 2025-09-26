@@ -1,0 +1,150 @@
+
+* {
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+body {
+    display: flex;
+    background-color: #F4F1DE;
+}
+
+
+h1 {
+    font-size: clamp(1rem, 2.5vw, 3rem);
+}
+
+.container {
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    margin: 15px;
+
+    max-height: 95vh;
+
+    background-color: #F2CC8F;
+    width: fit-content;
+}
+
+.right {
+    margin-left: auto;
+}
+.left {
+    margin-right: auto;
+}
+.center {
+    margin: auto;
+}
+.wide {
+    width: auto;
+}
+.overflow {
+    overflow: auto;
+}
+.row {
+    display: flex;
+}
+
+.purchasedItemRow {
+    width: auto;
+    overflow: auto;
+}
+
+.purchasedItem {
+    transform: scale(0.0);
+    translate: 0% -100%;
+    opacity: 0;
+    transition: transform, opacity,translate 0.2s ease;
+}
+.purchasedItem.show {
+    translate: 0% 0%;
+    transform: scale(1);
+    opacity: 1;
+}
+
+#clickbox {
+    width: 20%;
+    height: 95vh;
+    text-align: center;
+}
+#clickbox h2 {
+    font-size: clamp(1rem, 2.5vw, 3rem);
+}
+
+#clickbox button {
+    align-self: center;
+    margin: 0 auto;
+
+    border: none;
+    background-color: #E07A5F;
+
+    width: 80%;
+    height: 30%;
+    border-radius: 100%;
+
+    font-size: clamp(1rem, 2.5vw, 3rem);
+}
+#clickbox button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+#clickbox button:active {
+    transform: scale(0.95);
+}
+
+#shopbox {
+    text-align: center;
+    width: 20%;
+    height: 95vh;
+}
+#shopitems {
+    height: 90%;
+}
+#shopitems div {
+    gap: 20px;
+    user-select: none;
+
+    text-align: left;
+    font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+}
+#shopitems div p {
+    margin: 0;
+}
+#shopitems div p2 {
+    font-size: clamp(0.2rem, 2.5vw, 1.0rem);
+}
+#shopitems div:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+#shopitems div:active {
+    transform: scale(1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+#shopitems div.unaffordable {
+    opacity: 0.5;
+    background: #ccc;
+}
+#shopitems div.unaffordable:hover {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+#shopitems div.unaffordable:active {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+#purchaseditemsbox {
+    background-color: transparent;
+    width: 60%;
+    margin: 20px;
+
+}
+#purchaseditems {
+    display: flex;
+    flex-direction: column;
+    max-height: 90%;
+}
