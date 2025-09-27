@@ -1,6 +1,5 @@
 
 
-
 const purchasedItemsDisplay = document.getElementById("purchaseditems");
 const snusCountDisplay = document.getElementById('snuscount');
 const shopbox = document.getElementById("shopitemsbox");

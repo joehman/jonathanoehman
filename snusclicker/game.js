@@ -1,3 +1,7 @@
+
+
+
+
 class Modifier {
     constructor(game, callback) {
         this.callback = callback;
@@ -7,6 +11,11 @@ class Modifier {
 
 class Game {
     constructor(ticksPerSecond) {
+
+        this.purchasedItemsDisplay = document.getElementById("purchaseditems");
+        this.snusCountDisplay = document.getElementById('snuscount');
+        this.shopbox = document.getElementById("shopitemsbox");
+
         this.snusCount = 0;
         this.ticksPerSecond = ticksPerSecond;
         setInterval(this.tick.bind(this), 1000/ticksPerSecond);
@@ -29,10 +38,10 @@ class Game {
 
         display = `${formatter.format(this.snusCount)} snus`;
 
-        if (this.snusCount < 0) {
+        if (this.snusCount < 1) {
             display = `${this.snusCount.toFixed()} snus`;
         }
-        snusCountDisplay.innerText = display;
+        game.snusCountDisplay.innerText = display;
     }
     addModifier(modifier)
     {
@@ -57,7 +66,7 @@ class ShopItem {
         this.element.className = "container wide";
         this.element.classList.add("shopitem");
 
-        shopbox.appendChild(this.element);
+        game.shopbox.appendChild(this.element);
         const nametag = document.createElement("p");
         nametag.innerText = name;
         this.element.appendChild(nametag);
@@ -116,9 +125,6 @@ class ShopItem {
         }));
 
         this.itemsOwned++;
-
-
-
     }
 
     checkPrice()
@@ -134,7 +140,7 @@ class ShopItem {
 
         if (this.itemsOwned > 0 && !this.purchasedItemsDisplayCreated)
         {
-            purchasedItemsDisplay.append(this.purchasedItemsDisplay);
+            game.purchasedItemsDisplay.append(this.purchasedItemsDisplay);
             this.purchasedItemsDisplay.classList.add("container");
             this.purchasedItemsDisplay.classList.add("row");
             this.purchasedItemsDisplay.classList.add("overflow");
