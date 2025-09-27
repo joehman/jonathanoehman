@@ -43,6 +43,7 @@ class Game {
 class ShopItem {
     constructor(game, name, price, snusPerSecond) {
         this.purchasedItemsDisplay = document.createElement("div");
+        this.purchasedItemsDisplayCreated = false;
 
         this.itemsOwned = 0;
         this.name = name;
@@ -83,6 +84,7 @@ class ShopItem {
 
         const displayItem = document.createElement("div");
         this.purchasedItemsDisplay.appendChild(displayItem);
+
         displayItem.classList.add("container");
         displayItem.classList.add("purchasedItem");
 
@@ -104,16 +106,7 @@ class ShopItem {
 
         this.itemsOwned++;
 
-        if (this.itemsOwned > 0)
-        {
-            this.itemsOwned = 0;
 
-            purchasedItemsDisplay.append(this.purchasedItemsDisplay);
-            this.purchasedItemsDisplay.classList.add("container");
-            this.purchasedItemsDisplay.classList.add("row");
-            this.purchasedItemsDisplay.classList.add("overflow");
-            this.purchasedItemsDisplay.classList.add("purchasedItemRow");
-        }
 
     }
 
@@ -126,6 +119,16 @@ class ShopItem {
         } else if( !this.enabled && this.game.snusCount >= this.price) {
             this.element.classList.remove("unaffordable");
             this.enabled = true;
+        }
+
+        if (this.itemsOwned > 0 && !this.purchasedItemsDisplayCreated)
+        {
+            purchasedItemsDisplay.append(this.purchasedItemsDisplay);
+            this.purchasedItemsDisplay.classList.add("container");
+            this.purchasedItemsDisplay.classList.add("row");
+            this.purchasedItemsDisplay.classList.add("overflow");
+            this.purchasedItemsDisplay.classList.add("purchasedItemRow");
+            this.purchasedItemsDisplayCreated = true;
         }
     }
 }

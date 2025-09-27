@@ -63,6 +63,27 @@ h1 {
     opacity: 1;
 }
 
+.floating-text {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    color: green;
+    animation: floatUp 1s ease-out forwards;
+    pointer-events: none; /* doesn’t block clicks */
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+}
+
+
 #clickbox {
     width: 20%;
     height: 95vh;
@@ -70,6 +91,12 @@ h1 {
 }
 #clickbox h2 {
     font-size: clamp(1rem, 2.5vw, 3rem);
+    margin: 0;
+}
+#clickbox p {
+    margin: 0;
+    font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+    margin-bottom: 20px;
 }
 
 #clickbox button {
@@ -142,9 +169,12 @@ h1 {
     width: 60%;
     margin: 20px;
 
+    display: block;
+
 }
 #purchaseditems {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* force children to stack top → bottom */
+    gap: 10px; /* optional spacing */
     max-height: 90%;
 }
