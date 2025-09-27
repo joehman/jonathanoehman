@@ -21,7 +21,7 @@ function makeAllDraggable() {
 
             let nextX = e.clientX - offsetX;
             let nextY = e.clientY - offsetY;
-            
+
             if (nextX >= 0 && nextY >= 0)
             {
                 win.style.left = e.clientX - offsetX + "px";
