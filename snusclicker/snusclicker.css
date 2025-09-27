@@ -126,40 +126,51 @@ h1 {
     width: 20%;
     height: 95vh;
 }
-#shopitems {
+#shopitemsbox {
     height: 90%;
 }
-#shopitems div {
+#shopitemsbox div {
     gap: 20px;
     user-select: none;
-
     text-align: left;
     font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+    display: flex;
 }
-#shopitems div p {
+
+#tagbox {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+#tagbox p {
     margin: 0;
 }
-#shopitems div p2 {
+#tagbox p2 {
     font-size: clamp(0.2rem, 2.5vw, 1.0rem);
 }
-#shopitems div:hover {
+#tagbox p3 {
+    font-size: clamp(0.2rem, 2.5vw, 0.9rem);
+    text-align: right;
+}
+.shopitem:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
-#shopitems div:active {
+.shopitem:active {
     transform: scale(1);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
-#shopitems div.unaffordable {
+.shopitem.unaffordable {
     opacity: 0.5;
     background: #ccc;
 }
-#shopitems div.unaffordable:hover {
+.shopitem.unaffordable:hover {
     transform: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
-#shopitems div.unaffordable:active {
+.shopitem.unaffordable:active {
     transform: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }

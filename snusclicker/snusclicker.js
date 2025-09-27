@@ -3,7 +3,7 @@
 
 const purchasedItemsDisplay = document.getElementById("purchaseditems");
 const snusCountDisplay = document.getElementById('snuscount');
-const shopbox = document.getElementById("shopitems");
+const shopbox = document.getElementById("shopitemsbox");
 const snusbutton = document.getElementById("snusbutton");
 const snuspersecond = document.getElementById("snuspersecond");
 

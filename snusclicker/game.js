@@ -55,15 +55,25 @@ class ShopItem {
 
         this.element = document.createElement("div");
         this.element.className = "container wide";
+        this.element.classList.add("shopitem");
 
         shopbox.appendChild(this.element);
         const nametag = document.createElement("p");
         nametag.innerText = name;
         this.element.appendChild(nametag);
 
+        const tagbox = document.createElement("div");
+        tagbox.id = "tagbox";
+        this.element.appendChild(tagbox);
+
         const pricetag = document.createElement("p2");
         pricetag.innerText = `${price} snus`;
-        this.element.appendChild(pricetag);
+        tagbox.appendChild(pricetag);
+
+        const perSecondTag = document.createElement("p3");
+        perSecondTag.classList.add("right");
+        perSecondTag.innerText = `${this.snusPerSecond} snus per second`;
+        tagbox.appendChild(perSecondTag);
 
         this.element.onclick = () => {
             this.purchase();
@@ -71,6 +81,7 @@ class ShopItem {
 
         this.game.addModifier(new Modifier(game, () => {
             this.checkPrice();
+            perSecondTag.innerText = `${this.snusPerSecond} snus per second`;
         }));
     }
 
