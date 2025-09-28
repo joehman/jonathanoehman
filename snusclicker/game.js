@@ -1,7 +1,4 @@
 
-
-
-
 class Modifier {
     constructor(game, callback) {
         this.callback = callback;
@@ -146,6 +143,14 @@ class ShopItem {
             this.purchasedItemsDisplay.classList.add("overflow");
             this.purchasedItemsDisplay.classList.add("purchasedItemRow");
             this.purchasedItemsDisplayCreated = true;
+
+            console.log("row");
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    this.purchasedItemsDisplay.classList.add("show");
+                })
+            })
         }
     }
 }

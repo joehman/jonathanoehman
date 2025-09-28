@@ -1,14 +1,28 @@
+
+const html = document.getElementsByTagName("html")[0];
+const body = document.getElementsByTagName("body")[0];
+
 function makeAllDraggable() {
     const windows = document.querySelectorAll(".draggable");
 
+    let count = windows.length;
+
     windows.forEach((win) => {
         const handle = win.querySelector(".titlebar");
+
+        win.style.zIndex = "2";
 
         let offsetX = 0;
         let offsetY = 0;
         let isDragging = false;
 
         handle.addEventListener("mousedown", (e) => {
+            windows.forEach((winl) => {
+                winl.style.zIndex = "1";
+            })
+            win.style.zIndex = "2";
+
+
             isDragging = true;
             offsetX = e.clientX - win.offsetLeft;
             offsetY = e.clientY - win.offsetTop;
@@ -22,9 +36,10 @@ function makeAllDraggable() {
             let nextX = e.clientX - offsetX;
             let nextY = e.clientY - offsetY;
 
-            if (nextX >= 0 && nextY >= 0)
-            {
+            if (nextX >= 0) {
                 win.style.left = e.clientX - offsetX + "px";
+            }
+            if (nextY >= 0) {
                 win.style.top = e.clientY - offsetY + "px";
             }
         }
@@ -38,3 +53,8 @@ function makeAllDraggable() {
 }
 
 makeAllDraggable();
+
+const snusclickerbutton = document.getElementById("snusclickerbutton");
+snusclickerbutton.onclick = () => {
+    location.href = "snusclicker/snusclicker.html";
+}

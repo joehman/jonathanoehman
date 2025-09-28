@@ -8,17 +8,27 @@
 </head>
 <body>
     <div class="window draggable" id="welcomewindow" >
-        <div class="titlebar">Hello World!</div>
+        <div class="titlebar">
+            <div class="controls">
+                <img class="window clickable right" src="icons/close.png" alt="close">
+            </div>
+            <p>Intro</p>
 
-        <div class="window clickable">Click Me!</div>
+        </div>
 
-        <h1 id="title">Min Webbsida</h1>
+        <div class="windowcontent">
+            <h1>Om Mig</h1>
+            <p>Det här är min webbsida. Fin visst?</p>
+            <h2>Grejer jag byggt:</h2>
+            <div id="snusclickerbutton" class="window clickable">Snusclicker</div>
+        </div>
+
         <a class="mainlink" href="./snusclicker/snusclicker.html">Snusclicker</a>
     </div>
 
 
     <div class="window bottom taskbar">
-        <p class="window">window</p>
+        <p class="window tall clickable centertext"><img id="windowsimage" src="icons/windows.png" alt="windows"> Start</p>
 
     </div>
 

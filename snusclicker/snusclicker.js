@@ -23,14 +23,12 @@ snusbutton.onclick = (e) => {
     text.classList.add("floating-text");
     text.textContent = "+1";
 
-    // Place at click position
     const rect = snusbutton.getBoundingClientRect();
     text.style.left = `${e.clientX - rect.left}px`;
     text.style.top = `${e.clientY - rect.top}px`;
 
     snusbutton.appendChild(text);
 
-    // Remove after animation
     text.addEventListener("animationend", () => {
         text.remove();
     });

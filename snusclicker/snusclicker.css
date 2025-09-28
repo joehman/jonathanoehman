@@ -7,6 +7,10 @@
 body {
     display: flex;
     background-color: #F4F1DE;
+    position: relative;
+
+    animation-name: startAnimation;
+    animation-duration: 2s;
 }
 
 
@@ -29,6 +33,7 @@ h1 {
 
 .right {
     margin-left: auto;
+    text-align: right;
 }
 .left {
     margin-right: auto;
@@ -49,16 +54,22 @@ h1 {
 .purchasedItemRow {
     width: auto;
     overflow: auto;
+
+    translate: 0 -80vh;
+    transition: opacity, transform, translate 0.6s ease;
+}
+.purchasedItemRow.show {
+    translate: 0 0;
 }
 
 .purchasedItem {
     transform: scale(0.0);
-    translate: 0% -100%;
+    translate: 0 -100%;
     opacity: 0;
     transition: transform, opacity,translate 0.2s ease;
 }
 .purchasedItem.show {
-    translate: 0% 0%;
+    translate: 0 0;
     transform: scale(1);
     opacity: 1;
 }
@@ -188,4 +199,15 @@ h1 {
     flex-direction: column; /* force children to stack top → bottom */
     gap: 10px; /* optional spacing */
     max-height: 90%;
+}
+
+@keyframes startAnimation {
+    from {
+        background-color: white;
+        top: -150vh
+    }
+    to {
+        top: 0;
+        background-color: #F4F1DE;
+    }
 }

@@ -1,0 +1,44 @@
+
+body {
+    animation-name: testAnimation;
+    animation-duration: 2s;
+
+    position: absolute;
+
+    animation-timing-function: ease;
+}
+
+.container {
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    margin: 15px;
+
+    max-height: 95vh;
+
+    background-color: #F2CC8F;
+    width: fit-content;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cube {
+    width: 100px;
+    height: 100px;
+
+    top: 100px;
+
+
+}
+
+@keyframes testAnimation {
+    from {
+        top: -1000px;
+    }
+    to {
+        top: 0;
+    }
+}

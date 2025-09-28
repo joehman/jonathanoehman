@@ -5,20 +5,18 @@
 
 body {
     background-color: #0a8082;
-
     display:flex;
 }
 
 .window {
     image-rendering: pixelated;
-    font-family: Times New Roman, Times New Roman, serif;
+    font-family: Times New Roman,serif;
 
-    margin: 0 auto; /* centers horizontally */
-    text-align: center;
+    margin: auto; /* centers horizontally */
     width:fit-content;
 
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 1px;
+    padding-right: 1px;
 
     background-color: #c1c1c1;
     border-top: solid 2px white;
@@ -37,27 +35,50 @@ body {
     width: 100%;
 }
 
+.right {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.centertext {
+    text-align: center;
+}
+
 .taskbar {
     padding: 2px 6px;
     border-left: none;
     border-right: none;
     border-bottom: none;
 
-    height: 2vh;
+    height: 38px;
+    z-index: 0;
 }
+.tall {
+    height: 100%;
+}
+
 .titlebar {
     background: #000080;
-    color: white;
+
     height: 24px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2px;
-    font-size: 12px;
+
+    color:white;
+
+    font-size: 14px;
     font-weight: bold;
 
     margin: 0;
     user-select: none;
+
+    text-align: right;
+}
+.titlebar div.controls {
+    justify-self: right;
+}
+.titlebar p {
+    margin: 0;
+
 }
 
 .clickable {
@@ -77,3 +98,32 @@ body {
     width: 500px;
     height: 600px;
 }
+#welcomewindow.windowcontent {
+    margin: 10px;
+    text-align: center;
+}
+
+#windowsimage {
+    width: 30px;
+    height: 30px;
+}
+
+
+.fadeout {
+    animation: fadeout ease 2s;
+}
+.bgfadeout {
+    animation: bgfadeout ease 2s;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        background-color: #0a8082;
+    }
+    to {
+        opacity: 0;
+        background-color: white;
+    }
+}
+
