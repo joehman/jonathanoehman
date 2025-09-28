@@ -55,6 +55,11 @@ function makeAllDraggable() {
 makeAllDraggable();
 
 const snusclickerbutton = document.getElementById("snusclickerbutton");
+const mapquizbutton = document.getElementById("mapquizbutton");
+
 snusclickerbutton.onclick = () => {
     location.href = "snusclicker/snusclicker.html";
+}
+mapquizbutton.onclick = () => {
+    location.href = "mapquiz/index.html";
 }

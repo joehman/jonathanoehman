@@ -12,8 +12,9 @@ body {
     image-rendering: pixelated;
     font-family: Times New Roman,serif;
 
-    margin: auto; /* centers horizontally */
     width:fit-content;
+
+    margin: 5px;
 
     padding-left: 1px;
     padding-right: 1px;
@@ -24,8 +25,13 @@ body {
 
     border-right: solid 2px black;
     border-bottom: solid 2px black;
+}
 
+.draggable{
     position: absolute;
+}
+.windowcontent {
+    position: relative;
 }
 
 .bottom {
@@ -59,26 +65,22 @@ body {
 
 .titlebar {
     background: #000080;
-
     height: 24px;
     display: flex;
-
     color:white;
-
     font-size: 14px;
     font-weight: bold;
 
-    margin: 0;
     user-select: none;
-
-    text-align: right;
+    align-items: center;
 }
 .titlebar div.controls {
-    justify-self: right;
+    color:black;
+    margin-left: auto;
 }
-.titlebar p {
-    margin: 0;
-
+/*Applies to all elements with the title class inside an element with titlebar*/
+.titlebar .title {
+    margin-left: 2px;
 }
 
 .clickable {
@@ -93,6 +95,12 @@ body {
 
     transform: translate(1px, 1px);
 }
+#startButton {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
 
 #welcomewindow {
     width: 500px;
@@ -101,6 +109,7 @@ body {
 #welcomewindow.windowcontent {
     margin: 10px;
     text-align: center;
+
 }
 
 #windowsimage {

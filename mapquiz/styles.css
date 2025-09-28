@@ -1,0 +1,24 @@
+
+body {
+    display: flex;
+}
+
+.container {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: fit-content;
+}
+
+#map {
+    max-width: 60vw;
+    max-height: 80vh;
+}
+#mapcontainer {
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+#maplabels {
+    position: absolute;
+}
