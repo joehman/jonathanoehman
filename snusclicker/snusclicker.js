@@ -10,9 +10,9 @@ const snuspersecond = document.getElementById("snuspersecond");
 
 const game = new Game(100);
 
-const firstSnus = new ShopItem(game,"Snus Dealer", 1, 0.2);
-const secondSnus = new ShopItem(game,"Snus Importer", 100, 1);
-const thirdSnus = new ShopItem(game,"Snus Factory", 1000, 10);
+const firstSnus = new ShopItem(game,"Snuslangare", 1, 0.2);
+const secondSnus = new ShopItem(game,"Snusimporterare", 100, 1);
+const thirdSnus = new ShopItem(game,"Snusfabrik", 1000, 10);
 
 
 
