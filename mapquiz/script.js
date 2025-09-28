@@ -68,7 +68,6 @@ function makegenerated()
     });
 }
 
-makegenerated();
 
 countries.forEach((question) => {
     const row = document.createElement("tr");
