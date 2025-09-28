@@ -39,7 +39,7 @@ let lastSnusCount = 0;
 setInterval(() => {
     let currentSnusCount = game.snusCount;
 
-    snuspersecond.innerText = `${ (currentSnusCount - lastSnusCount).toFixed(2) } per second`;
+    snuspersecond.innerText = `${ (currentSnusCount - lastSnusCount).toFixed(2) } per sekund`;
 
     lastSnusCount = currentSnusCount;
 }, 1000)

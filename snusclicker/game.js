@@ -87,7 +87,7 @@ class ShopItem {
 
         this.game.addModifier(new Modifier(game, () => {
             this.checkPrice();
-            perSecondTag.innerText = `${this.snusPerSecond} snus per second`;
+            perSecondTag.innerText = `${this.snusPerSecond} snus/sekund`;
         }));
     }
 
