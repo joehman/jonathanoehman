@@ -1,19 +1,26 @@
 
 body {
     display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-wrap: wrap;
 }
 
 .container {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     width: fit-content;
+    height: fit-content;
 }
 
 #map {
     max-width: 60vw;
     max-height: 80vh;
+
+    min-width: 50vw;
 }
 #mapcontainer {
+    position: relative;
     margin-left: auto;
     margin-right: 20px;
     margin-top: 20px;
@@ -21,4 +28,24 @@ body {
 
 #maplabels {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#maplabels p {
+    position: absolute;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+}
+
+#rätta, #restart {
+    width: 50%;
+    height: 10%;
+    font-size: 2rem;
+    margin: auto;
 }

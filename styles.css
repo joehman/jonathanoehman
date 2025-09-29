@@ -103,8 +103,8 @@ body {
 
 
 #welcomewindow {
-    width: 500px;
-    height: 600px;
+    width: 20vw;
+    height: 30vh;
 }
 #welcomewindow.windowcontent {
     margin: 10px;
