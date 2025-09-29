@@ -55,11 +55,17 @@ function makeAllDraggable() {
 makeAllDraggable();
 
 const snusclickerbutton = document.getElementById("snusclickerbutton");
+const oscarsnusclickerbutton = document.getElementById("oscarsnusclickerbutton")
+
 const mapquizbutton = document.getElementById("mapquizbutton");
+
 
 snusclickerbutton.onclick = () => {
     location.href = "snusclicker/snusclicker.html";
 }
 mapquizbutton.onclick = () => {
     location.href = "mapquiz/index.html";
+}
+oscarsnusclickerbutton.onclick = () => {
+    location.href = "vendor/oscarsnusclicker/index.html"
 }

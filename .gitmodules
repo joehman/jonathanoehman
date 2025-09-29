@@ -1,0 +1,3 @@
+[submodule "vendor/oscarsnusclicker"]
+	path = vendor/oscarsnusclicker
+	url = https://github.com/blueogge-lang/snus-clicker.git
