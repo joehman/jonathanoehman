@@ -3,7 +3,6 @@ body {
     display: flex;
     align-items: center;
     justify-items: center;
-    flex-wrap: wrap;
 }
 
 .container {
@@ -14,10 +13,9 @@ body {
 }
 
 #map {
-    max-width: 60vw;
-    max-height: 80vh;
-
-    min-width: 50vw;
+    width: 80vw;
+    height: 80vh;
+    min-width: 1000px;
 }
 #mapcontainer {
     position: relative;
@@ -45,7 +43,15 @@ body {
 
 #rätta, #restart {
     width: 50%;
-    height: 10%;
+    padding: 12px 0;
     font-size: 2rem;
-    margin: auto;
+}
+
+#tablecontainer {
+    max-width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+#table {
+    width: auto;
 }
