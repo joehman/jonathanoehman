@@ -76,6 +76,10 @@ class ShopItem {
         pricetag.innerText = `${price} snus`;
         tagbox.appendChild(pricetag);
 
+        const linebreak = document.createElement("div");
+        linebreak.classList.add("linebreak");
+        tagbox.appendChild(linebreak);
+
         const perSecondTag = document.createElement("p3");
         perSecondTag.classList.add("right");
         perSecondTag.innerText = `${this.snusPerSecond} snus per second`;
@@ -122,10 +126,19 @@ class ShopItem {
         }));
 
         this.itemsOwned++;
+        
+        let newprice = this.price * Math.pow(1.15, this.itemsOwned);
+        this.price = newprice;
+        
     }
 
     checkPrice()
     {
+        const tagbox = this.element.children[1];
+        const pricetag = tagbox.children[0];
+        
+        pricetag.innerText = `${this.price.toFixed(2)} snus`;
+
         if (this.game.snusCount < this.price)
         {
             this.element.classList.add("unaffordable");
