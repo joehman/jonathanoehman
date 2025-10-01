@@ -1,13 +1,15 @@
 
-class Modifier {
-    constructor(game, callback) {
-        this.callback = callback;
-        game.addModifier(this);
+class Adder {
+    constructor(addPerSecond, type) {
+        this.addPerSecond = addPerSecond;
+        this.type = type;
     }
 }
 
-class Game {
+// extends eventtarget for .addeventlistener
+class Game extends EventTarget {
     constructor(ticksPerSecond) {
+        super();
 
         this.purchasedItemsDisplay = document.getElementById("purchaseditems");
         this.snusCountDisplay = document.getElementById('snuscount');
@@ -17,13 +19,15 @@ class Game {
         this.ticksPerSecond = ticksPerSecond;
         setInterval(this.tick.bind(this), 1000/ticksPerSecond);
 
-        this.modifiers = [];
+        this.adders = [];
+
+        this.tickEvent = new CustomEvent('tick', {});
     }
     tick()
     {
-        this.modifiers.forEach((modifier) => {
-            modifier.callback();
-        })
+        this.adders.forEach((adder, index) => {
+            this.snusCount += adder.addPerSecond / this.ticksPerSecond;
+        });
 
         const formatter = new Intl.NumberFormat(undefined, {
             notation: "compact",
@@ -32,103 +36,57 @@ class Game {
         })
 
         let display;
-
         display = `${formatter.format(this.snusCount)} snus`;
 
         if (this.snusCount < 1) {
             display = `${this.snusCount.toFixed()} snus`;
         }
         game.snusCountDisplay.innerText = display;
+
+        this.dispatchEvent(this.tickEvent);
     }
-    addModifier(modifier)
+    addAdder(adder)
     {
-        this.modifiers.push(modifier);
+        this.adders.push(adder);
     }
 }
 
 class ShopItem {
     constructor(game, name, price, snusPerSecond) {
-        this.purchasedItemsDisplay = document.createElement("div");
-        this.purchasedItemsDisplayCreated = false;
-
         this.itemsOwned = 0;
-        this.name = name;
         this.price = price;
-        this.snusPerSecond = snusPerSecond;
+        this.adder = new Adder(snusPerSecond, name);
         this.game = game;
 
         this.enabled = true;
 
-        this.element = document.createElement("div");
-        this.element.className = "container wide";
-        this.element.classList.add("shopitem");
-
-        game.shopbox.appendChild(this.element);
-        const nametag = document.createElement("p");
-        nametag.innerText = name;
-        this.element.appendChild(nametag);
-
-        const linebreak = document.createElement("div");
-        linebreak.classList.add("linebreak");
-        this.element.appendChild(linebreak);
-
-        const tagbox = document.createElement("div");
-        tagbox.id = "tagbox";
-        this.element.appendChild(tagbox);
-
-        const pricetag = document.createElement("p2");
-        pricetag.innerText = `${price} snus`;
-        tagbox.appendChild(pricetag);
-
-
-        const perSecondTag = document.createElement("p3");
-        perSecondTag.innerText = `${this.snusPerSecond} snus per second`;
-        tagbox.appendChild(perSecondTag);
+        this.createShopItemDisplay();
 
         this.element.onclick = () => {
             this.purchase();
         }
 
-        this.game.addModifier(new Modifier(game, () => {
+        this.game.addEventListener("tick", () => {
             this.checkPrice();
-            perSecondTag.innerText = `${this.snusPerSecond} snus/sekund`;
-        }));
+            this.perSecondTag.innerText = `${this.adder.addPerSecond} snus per sekund`;
+        });
     }
 
     purchase()
     {
         if (this.game.snusCount < this.price)
         {
-            console.log("Less than!");
             return;
         }
 
-        const displayItem = document.createElement("div");
-        this.purchasedItemsDisplay.appendChild(displayItem);
-
-        displayItem.classList.add("container");
-        displayItem.classList.add("purchasedItem");
-
-        const displayName = document.createElement("p");
-        displayName.innerText = this.name;
-        displayItem.appendChild(displayName);
-
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                displayItem.classList.add("show");
-            })
-        })
-
+        this.addItemDisplay();
 
         this.game.snusCount -= this.price;
-        this.game.addModifier(new Modifier(game, () => {
-            this.game.snusCount +=  this.snusPerSecond / this.game.ticksPerSecond;
-        }));
-
         this.itemsOwned++;
-        
+
         this.price = this.price * Math.pow(1.15, this.itemsOwned);
-        
+
+        this.game.addAdder(this.adder);
     }
 
     checkPrice()
@@ -149,20 +107,64 @@ class ShopItem {
 
         if (this.itemsOwned > 0 && !this.purchasedItemsDisplayCreated)
         {
-            game.purchasedItemsDisplay.append(this.purchasedItemsDisplay);
-            this.purchasedItemsDisplay.classList.add("container");
-            this.purchasedItemsDisplay.classList.add("row");
-            this.purchasedItemsDisplay.classList.add("overflow");
-            this.purchasedItemsDisplay.classList.add("purchasedItemRow");
-            this.purchasedItemsDisplayCreated = true;
-
-            console.log("row");
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    this.purchasedItemsDisplay.classList.add("show");
-                })
-            })
+            this.createItemDisplayRow();
         }
     }
+
+    addItemDisplay()
+    {
+        const displayItem = document.createElement("div");
+        this.purchasedItemsDisplay.appendChild(displayItem);
+
+        displayItem.classList.add("container");
+        displayItem.classList.add("purchasedItem");
+        displayItem.innerHTML = `
+            <p>${this.adder.type}</p>
+        `
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                displayItem.classList.add("show");
+            })
+        })
+    }
+
+    createShopItemDisplay()
+    {
+        this.element = document.createElement("div");
+        this.element.className = "container wide";
+        this.element.classList.add("shopitem");
+
+        this.purchasedItemsDisplay = document.createElement("div");
+        this.purchasedItemsDisplayCreated = false;
+
+        this.game.shopbox.appendChild(this.element);
+
+        this.element.innerHTML = `
+            <p>${this.adder.type}</p>
+            <div class="linebreak"></div>
+            <div class="tagbox">
+                <p class="priceTag">${this.price} snus</p>
+                <p class="perSecondTag">${this.adder.addPerSecond} snus per second</p>
+            </div>
+        `;
+
+        this.perSecondTag = this.element.querySelector(".tagbox .perSecondTag");
+    }
+    createItemDisplayRow()
+    {
+        game.purchasedItemsDisplay.append(this.purchasedItemsDisplay);
+        this.purchasedItemsDisplay.classList.add("container");
+        this.purchasedItemsDisplay.classList.add("row");
+        this.purchasedItemsDisplay.classList.add("overflow");
+        this.purchasedItemsDisplay.classList.add("purchasedItemRow");
+        this.purchasedItemsDisplayCreated = true;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                this.purchasedItemsDisplay.classList.add("show");
+            })
+        })
+    }
+
 }

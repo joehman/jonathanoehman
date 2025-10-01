@@ -19,15 +19,19 @@ const thirdSnus = new ShopItem(game,"Snusfabrik", 1000, 10);
 snusbutton.onclick = (e) => {
     game.snusCount += 1;
 
+    const body = document.querySelector("body");
+
     const text = document.createElement("div");
     text.classList.add("floating-text");
     text.textContent = "+1";
 
     const rect = snusbutton.getBoundingClientRect();
-    text.style.left = `${e.clientX - rect.left}px`;
-    text.style.top = `${e.clientY - rect.top}px`;
+    text.style.left = `${e.clientX - 20}px`;
+    text.style.top = `${e.clientY - 20}px`;
 
-    snusbutton.appendChild(text);
+    console.log("left: ", body.offsetLeft, "right: ", body.offsetTop);
+
+    body.appendChild(text);
 
     text.addEventListener("animationend", () => {
         text.remove();
