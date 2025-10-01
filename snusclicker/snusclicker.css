@@ -63,8 +63,7 @@ h1 {
     translate: 0 -80vh;
     transition: opacity, transform, translate 0.6s ease;
 
-    flex-shrink: 0;
-    flex-grow: 0;
+
 }
 .purchasedItemRow.show {
     translate: 0 0;
@@ -75,8 +74,6 @@ h1 {
     translate: 0 -100%;
     opacity: 0;
     transition: transform, opacity,translate 0.2s ease;
-
-    flex: none;
 }
 .purchasedItem.show {
     translate: 0 0;
@@ -154,6 +151,8 @@ h1 {
 #tagbox {
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
+
 }
 #tagbox p {
     margin: 0;
@@ -173,11 +172,15 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 2px;
+
+    overflow: auto;
+    text-overflow: ellipsis;
+    word-wrap: revert;
 }
 .shopitem p
 {
     margin: 0;
-    font-size: large;
+    font-size: larger;
 }
 
 .shopitem:hover {
@@ -204,16 +207,9 @@ h1 {
 
 #purchaseditemsbox {
     background-color: transparent;
-    width: 60%;
-    margin: 20px;
-
-    display: block;
-
-    flex-grow: 0;
+    width: 60%
 }
 #purchaseditems {
-    flex-grow: 0;
-
     display: flex;
     flex-direction: column; 
     gap: 10px; 
