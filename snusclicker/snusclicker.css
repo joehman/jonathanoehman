@@ -91,6 +91,8 @@ h1 {
     pointer-events: none; /* doesn’t block clicks */
 }
 
+
+
 @keyframes floatUp {
     from {
         opacity: 1;
@@ -226,4 +228,12 @@ h1 {
         top: 0;
         background-color: #F4F1DE;
     }
+}
+
+.invisible {
+    opacity: 0;
+}
+.incognito {
+    background-color: black;
+    color: black;
 }

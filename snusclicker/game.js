@@ -16,6 +16,8 @@ class Game extends EventTarget {
         this.shopbox = document.getElementById("shopitemsbox");
 
         this.snusCount = 0;
+        this.highestSnusCount = 0;
+
         this.ticksPerSecond = ticksPerSecond;
         setInterval(this.tick.bind(this), 1000/ticksPerSecond);
 
@@ -44,6 +46,10 @@ class Game extends EventTarget {
         game.snusCountDisplay.innerText = display;
 
         this.dispatchEvent(this.tickEvent);
+
+        if (this.snusCount > this.highestSnusCount) {
+            this.highestSnusCount = this.snusCount;
+        }
     }
     addAdder(adder)
     {
@@ -52,11 +58,14 @@ class Game extends EventTarget {
 }
 
 class ShopItem {
-    constructor(game, name, price, snusPerSecond) {
+    constructor(game, name, price, snusPerSecond, minSnus) {
+        this.game = game;
+
+        this.minSnus = minSnus;
         this.itemsOwned = 0;
         this.price = price;
+
         this.adder = new Adder(snusPerSecond, name);
-        this.game = game;
 
         this.enabled = true;
 
@@ -68,7 +77,7 @@ class ShopItem {
 
         this.game.addEventListener("tick", () => {
             this.checkPrice();
-            this.perSecondTag.innerText = `${this.adder.addPerSecond} snus per sekund`;
+            this.perSecondTag.innerText = `${this.adder.addPerSecond} snus/sekund`;
         });
     }
 
@@ -93,7 +102,9 @@ class ShopItem {
     {
         const tagbox = this.element.children[2];
         const pricetag = tagbox.children[0];
-        
+
+        this.checkVisibility();
+
         pricetag.innerText = `${this.price.toFixed(2)} snus`;
 
         if (this.game.snusCount < this.price)
@@ -108,6 +119,22 @@ class ShopItem {
         if (this.itemsOwned > 0 && !this.purchasedItemsDisplayCreated)
         {
             this.createItemDisplayRow();
+        }
+    }
+    checkVisibility()
+    {
+        if (this.game.highestSnusCount < this.minSnus )
+        {
+            this.element.classList.add('invisible');
+        }
+        if (this.game.highestSnusCount > (this.minSnus*0.5) )
+        {
+            this.element.classList.remove('invisible');
+            this.element.classList.add('incognito');
+        }
+        if (this.game.highestSnusCount > this.minSnus)
+        {
+            this.element.classList.remove('incognito');
         }
     }
 
