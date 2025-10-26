@@ -37,13 +37,8 @@ class Game extends EventTarget {
             style: "decimal",
         })
 
-        let display;
-        display = `${formatter.format(this.snusCount)} snus`;
 
-        if (this.snusCount < 1) {
-            display = `${this.snusCount.toFixed()} snus`;
-        }
-        game.snusCountDisplay.innerText = display;
+        game.snusCountDisplay.innerText = `${Format.formatNumber(this.snusCount)} snus`;
 
         this.dispatchEvent(this.tickEvent);
 
@@ -55,6 +50,15 @@ class Game extends EventTarget {
     {
         this.adders.push(adder);
     }
+
+    getSnusPerSecond()
+    {
+        let count = 0;
+        this.adders.forEach((adder) => {
+            count += adder.addPerSecond;
+        });
+        return count;
+    }
 }
 
 class ShopItem {
@@ -63,21 +67,21 @@ class ShopItem {
 
         this.minSnus = minSnus;
         this.itemsOwned = 0;
-        this.price = price;
+
+        this.basePrice = price;
+        this.price = this.basePrice;
 
         this.adder = new Adder(snusPerSecond, name);
 
         this.enabled = true;
 
         this.createShopItemDisplay();
-
         this.element.onclick = () => {
             this.purchase();
         }
 
         this.game.addEventListener("tick", () => {
             this.checkPrice();
-            this.perSecondTag.innerText = `${this.adder.addPerSecond} snus/sekund`;
         });
     }
 
@@ -93,19 +97,21 @@ class ShopItem {
         this.game.snusCount -= this.price;
         this.itemsOwned++;
 
-        this.price = this.price * Math.pow(1.15, this.itemsOwned);
+        this.price = this.basePrice * Math.pow(1.15, this.itemsOwned);
+        console.log(this.itemsOwned);
 
         this.game.addAdder(this.adder);
+        this.itemCountTag.innerHTML = `<p>${Format.formatWholeNumber(this.itemsOwned)}</p>`;
     }
 
     checkPrice()
     {
-        const tagbox = this.element.children[2];
-        const pricetag = tagbox.children[0];
+        const tagbox = this.element.children[0];
+        const pricetag = tagbox.children[2];
 
         this.checkVisibility();
 
-        pricetag.innerText = `${this.price.toFixed(2)} snus`;
+        pricetag.innerText = `${Format.formatNumber(this.price)} snus`;
 
         if (this.game.snusCount < this.price)
         {
@@ -168,15 +174,19 @@ class ShopItem {
         this.game.shopbox.appendChild(this.element);
 
         this.element.innerHTML = `
-            <p>${this.adder.type}</p>
-            <div class="linebreak"></div>
             <div class="tagbox">
+                <p class="nameTag">${this.adder.type}</p>
+                <div class="linebreak"></div>
                 <p class="priceTag">${this.price} snus</p>
-                <p class="perSecondTag">${this.adder.addPerSecond} snus per second</p>
+                <p class="perSecondTag">${Format.formatNumber(this.adder.addPerSecond)} snus per second</p>
+            </div>
+            <div class="purchasedItemCount">
+                <p>0</p>
             </div>
         `;
 
         this.perSecondTag = this.element.querySelector(".tagbox .perSecondTag");
+        this.itemCountTag = this.element.querySelector(".purchasedItemCount");
     }
     createItemDisplayRow()
     {

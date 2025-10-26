@@ -57,11 +57,7 @@ snusbutton.onclick = (e) => {
 }
 
 
-let lastSnusCount = 0;
-setInterval(() => {
-    let currentSnusCount = game.snusCount;
+game.addEventListener("tick", () => {
+    snuspersecond.innerText = `${Format.formatNumber(game.getSnusPerSecond())} per sekund`;
+})
 
-    snuspersecond.innerText = `${ (currentSnusCount - lastSnusCount).toFixed(2) } per sekund`;
-
-    lastSnusCount = currentSnusCount;
-}, 1000)

@@ -155,7 +155,7 @@ h1 {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
-
+    width: fit-content;
 }
 .tagbox p {
     margin: 0;
@@ -167,24 +167,25 @@ h1 {
     font-size: clamp(0.2rem, 2.5vw, 0.9rem);
     text-align: right;
 }
+.tagbox .nameTag
+{
+    margin: 0;
+    font-size: larger;
+}
+
 .shopitem {
     user-select: none;
     text-align: left;
     font-size: clamp(0.1rem, 2.5vw, 1.5rem);
     
     display: flex;
-    flex-wrap: wrap;
     gap: 2px;
 
     overflow: auto;
     text-overflow: ellipsis;
     word-wrap: revert;
 }
-.shopitem p
-{
-    margin: 0;
-    font-size: larger;
-}
+
 
 .shopitem:hover {
     transform: scale(1.03);
@@ -206,6 +207,14 @@ h1 {
 .shopitem.unaffordable:active {
     transform: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.purchasedItemCount {
+    text-align:right;
+    justify-items: center;
+
+    width: auto;
+    margin-right: 10px;
 }
 
 #purchaseditemsbox {
